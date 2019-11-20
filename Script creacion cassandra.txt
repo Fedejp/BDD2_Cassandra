@@ -1,0 +1,241 @@
+### Creacion del keyspace
+
+create KEYSPACE TPO_Musica WITH replication =  {'class':
+'SimpleStrategy', 'replication_factor': '1' };
+
+USE TPO_Musica;
+
+
+### Creacion de las estructuras
+
+CREATE TABLE consulta1(
+	id_usuario int,
+	nombre_usuario text,
+	apellido_usuario text,
+	mail_usuario text,
+	pwd_usuario text,
+	id_musico_interprete int,
+	nombre_musico text,
+	apellido_musico text,
+	isBanda_musico boolean,
+	miembros_musico list<text>,
+	PRIMARY KEY (id_usuario, id_musico_interprete, nombre_musico, apellido_musico)
+);
+
+CREATE TABLE consulta234(
+	id_autor_letra int,
+	nombre_musico_letra text,
+	apellido_musico_letra text,
+	isBanda_musico_letra boolean,
+	id_cancion int,
+	nombre_cancion text,
+	genero_cancion text,
+	letra_cancion text,
+	id_autor_musica int,
+	nombre_musico_musica text,
+	apellido_musico_musica text,
+	isBanda_musico_musica boolean,
+	id_interprete_cancion int,
+	nombre_musico_interprete text,
+	apellido_musico_interprete text,
+	isBanda_musico_interprete boolean,
+	PRIMARY KEY ((id_autor_letra, id_autor_musica), id_cancion, nombre_cancion, id_interprete_cancion)
+);
+
+CREATE TABLE consulta578(
+	id_disquera int,
+	nombre_disquera text,
+	id_album int, 
+	nombre_album text,
+	ano_album int,
+	portada_album blob,
+	id_cancion int,
+	nombre_cancion text,
+	PRIMARY KEY ((id_disquera, id_album), nombre_disquera, nombre_album, id_cancion, nombre_cancion)
+);
+
+
+ Create type tpo_musica.cancion(id_cancion int,nombre_cancion text, );
+
+CREATE TABLE consulta6(
+	id_album int,
+	nombre_album text,
+	id_autor_resena int,
+	nombre_autor_resena text,
+	apellido_autor_resena text,
+	id_resena int,
+	texto_resena text,
+	fecha_resena timestamp,
+	id_canciones LIST<int>,	
+	PRIMARY KEY (id_album, nombre_album, id_resena, id_autor_resena)
+);
+
+CREATE INDEX busquedacancion ON consulta6(id_canciones);
+
+### Insercion de datos
+##consulta1
+
+BEGIN BATCH
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (2, 'Claudio', 'Godio', 'cgod@gmail.com', 'bdd2', 2, '', 'Red Hot Chili Peppers', true, ['Anthony Kiedis', 'Flea','Chad Smith', 'Josh Klingserhoffer']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (2, 'Claudio', 'Godio', 'cgod@gmail.com', 'bdd2', 1, '','Foo Fighters', true, ['Dave Grohl', 'Taylor Hawkings']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (2, 'Claudio', 'Godio', 'cgod@gmail.com', 'bdd2', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (1, 'Lucas', 'Sanse', 'lusan@gmail.com', '123456', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (1, 'Lucas', 'Sanse', 'lusan@gmail.com', '123456', 6, 'El','Kuelgue', true,['Micho Torres', 'Pepe Insaurralde', 'Juancho Tapata', 'Facu Orosco']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (1, 'Lucas', 'Sanse', 'lusan@gmail.com', '123456', 3, 'Ed','Sheeran', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (3, 'Santiago', 'Yanzon', 'cyan@space.com', 'kiwi', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (3, 'Santiago', 'Yanzon', 'cyan@space.com', 'kiwi', 7, 'Justin','Bieber', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (4, 'Federico', 'Parodi', 'fpar@design.com', 'ferrari', 1, '','Foo Fighters', true, ['Dave Grohl', 'Taylor Hawkings']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (4, 'Federico', 'Parodi', 'fpar@design.com', 'ferrari', 2, '', 'Red Hot Chili Peppers', true, ['Anthony Kiedis', 'Flea','Chad Smith', 'Josh Klingserhoffer']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (4, 'Federico', 'Parodi', 'fpar@design.com', 'ferrari', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (5, 'Agostina', 'Costello', 'acost@mail.com', 'dibujo', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (5, 'Agostina', 'Costello', 'acost@mail.com', 'dibujo', 4, 'Lana','Del Rey', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (5, 'Agostina', 'Costello', 'acost@mail.com', 'dibujo', 5, '','Adele', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (6, 'Axel', 'Roitmann', 'axel@mail.com', 'manroit', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (6, 'Axel', 'Roitmann', 'axel@mail.com', 'manroit', 3, 'Ed','Sheeran', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (6, 'Axel', 'Roitmann', 'axel@mail.com', 'manroit', 6, 'El','Kuelgue', true,['Micho Torres', 'Pepe Insaurralde', 'Juancho Tapata', 'Facu Orosco']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (7, 'Alexis', 'Armengol', 'aa@mail.com', 'aeropuerto', 3, 'Ed','Sheeran', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (7, 'Alexis', 'Armengol', 'aa@mail.com', 'aeropuerto', 2, '', 'Red Hot Chili Peppers', true, ['Anthony Kiedis', 'Flea','Chad Smith', 'Josh Klingserhoffer']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (8, 'Mariano', 'Saa', 'saa@mail.com', 'pausa', 5, '','Adele', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (8, 'Mariano', 'Saa', 'saa@mail.com', 'pausa', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (9, 'Matias', 'Panza', 'panza@mail.com', 'panzon', 7, 'Justin','Bieber', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico, miembros_musico) VALUES (9, 'Matias', 'Panza', 'panza@mail.com', 'panzon', 1, '','Foo Fighters', true, ['Dave Grohl', 'Taylor Hawkings']);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (10, 'Pepe', 'Mujica', 'pepe@mail.com', 'uruguay', 9, 'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta1(id_usuario, nombre_usuario, apellido_usuario, mail_usuario, pwd_usuario, id_musico_interprete, nombre_musico, apellido_musico, isBanda_musico) VALUES (10, 'Pepe', 'Mujica', 'pepe@mail.com', 'uruguay',  5, '','Adele', false);
+APPLY BATCH;
+
+##consulta234
+BEGIN BATCH
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (10,'Anthony','Kiedis', false, 1, 'Californication','Rock','Living Californication…',12,'Chad','Smith',false,2,'','Red Hot Chili Peppers', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (10,'Anthony','Kiedis', false, 2, 'Dani California','Rock','Being born, in the state of missisipi…',10,'Anthony','Kiedis', false,2,'','Red Hot Chili Peppers', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (10,'Anthony','Kiedis', false, 3, 'Hump da Bump','Rock','Hump da bump, you’ve got to...',12,'Chad','Smith',false,2,'','Red Hot Chili Peppers', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (10,'Anthony','Kiedis', false, 4, 'Snow','Rock','Hey Oh, Listen what i’ve gotta say, yo…',12,'Chad','Smith',false,2,'','Red Hot Chili Peppers', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (10,'Anthony','Kiedis', false, 5, 'Scar Tissue','Rock','Scar Tissue when I Need you most...',10,'Anthony','Kiedis', false,2,'','Red Hot Chili Peppers', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (8,'Dave','Grohl', false, 6, 'The Pretender','Rock','What if I said i’m not like the others…',8,'Dave','Grohl', false,1,'','Foo Fighters', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (8,'Dave','Grohl', false, 7, 'Walk','Rock','Learning to walk again…',8,'Dave','Grohl', false,1,'','Foo Fighters', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (8,'Dave','Grohl', false, 8, 'Monkey Wrench','Rock','Don’t wanna be your monkey wrench',11,'Taylor','Hawkings', false,1,'','Foo Fighters', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (8,'Dave','Grohl', false, 9, 'Wasting Light','Rock','You’re a lamp, dont waste light…',8,'Dave','Grohl', false,1,'','Foo Fighters', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (11,'Taylor','Hawkings', false, 10, 'Everlong','Rock','Hello, i’ve been waiting here for long…',8,'Dave','Grohl', false,1,'','Foo Fighters', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (8,'Dave','Grohl', false,11, 'All my life','Rock','All my life i’ve been waiting for something..',8,'Dave','Grohl', false,1,'','Foo Fighters', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (3,'Ed','Sheeran', false,12, 'Shape of you','Pop','Im in love with the shape of you...',3,'Ed','Sheeran', false,3,'Ed','Sheeran', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (3,'Ed','Sheeran', false,13, 'Perfect','Pop','Baby you’re perfect for me...',3,'Ed','Sheeran', false,3,'Ed','Sheeran', false);
+APPLY BATCH;
+BEGIN BATCH
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (7,'Justin','Bieber', false,14, 'Baby','Pop','Baby, baby, baby, oh…',13,'Max','Martin', false,7,'Justin','Bieber', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (7,'Justin','Bieber', false,15, 'I dont care','Pop','Cus I dont care that you’re with somebody else...',3,'Ed','Sheeran', false,7,'Justin','Bieber', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (4,'Lana','Del Rey', false,16, 'Summertime Sadness','Pop','ive got this summertime, summertime sadness',13,'Max','Martin', false,4,'Lana','Del Rey', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (4,'Lana','Del Rey', false,17, 'Dont call me angel','Pop','So please, dont call me Angel',13,'Max','Martin', false,4,'Lana','Del Rey', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (5,'','Adele', false,18, 'Hello','Pop','Hello, its me…',3,'Ed','Sheeran', false,5,'','Adele', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (5,'','Adele', false,19, 'Set fire to the rain','Pop','i’ve set fire… To the rain...',3,'Ed','Sheeran', false,5,'','Adele', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (12,'Pepe','Insaurralde', false,20, 'Parque Acuatico','Pop','Tengo un puestito a 5 lucas…',14,'Lalo','Schifrin', false,6,'El','Kuelgue', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (12,'Pepe','Insaurralde', false,21, 'Paraiso de los perros','Pop','Y por eso hoy te invito al paraiso de los perros',14,'Lalo','Schifrin', false,6,'El','Kuelgue', true);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (9,'Gustavo','Cerati', false,22, 'Puente','Pop','Hoy te busque en la rima que duerme...',9,'Gustavo','Cerati', false,9,'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (9,'Gustavo','Cerati', false,23, 'Crimen','Pop','La espera me agoto, no se nada de vos…',9,'Gustavo','Cerati', false,9,'Gustavo','Cerati', false);
+	INSERT INTO tpo_musica.consulta234(id_autor_letra, nombre_musico_letra, apellido_musico_letra, isBanda_musico_letra, id_cancion, nombre_cancion, genero_cancion, letra_cancion, id_autor_musica, nombre_musico_musica, apellido_musico_musica, isBanda_musico_musica, id_interprete_cancion, nombre_musico_interprete, apellido_musico_interprete, isBanda_musico_interprete) VALUES (9,'Gustavo','Cerati', false,24, 'Puente','Pop','Hoy te busque en la rima que duerme...',9,'Gustavo','Cerati', false,6,'El','Kuelgue', true);
+APPLY BATCH;
+
+
+##Consulta578
+BEGIN BATCH
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1,1, 'Sony Music',  'Californication', 2003,1, 'Californication');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 1, 'Sony Music', 'Californication', 2003,2, 'Dani California');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 1, 'Sony Music', 'Californication', 2003,3, 'Hump Da Bump');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 1,'Sony Music',  'Californication', 2003,4, 'Snow');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1,1, 'Sony Music',  'Californication', 2003,5, 'Scar Tissue');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 2, 'Sony Music', 'Wasting Light', 2005,9, 'Wasting Light');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1,  2,'Sony Music', 'Wasting Light', 2005,7, 'Walk');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 3,'Sony Music',  'Echoes, Silence, Patience and Grace', 2008,6, 'The Pretender');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 3,'Sony Music',  'Echoes, Silence, Patience and Grace', 2008,11, 'All my life');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 4,'Sony Music',  'One By One', 2001,8, 'Monkey Wrench');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1, 4, 'Sony Music', 'One By One', 2001,10, 'Everlong');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1,5, 'Sony Music','Divide',2016,12, 'Shape of you');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (1,5, 'Sony Music','Divide',2016, 13, 'Perfect');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2,6, 'Universal',  'Justin Bieber',2012, 14, 'Baby');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2,6, 'Universal',  'Justin Bieber',2012, 15, 'I dont care');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2, 7, 'Universal', 'Del Rey',2014, 16, 'Summertiime Sadness');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2, 7, 'Universal', 'Del Rey',2014, 17, 'Dont call me angel');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2,8, 'Universal',  '21',2013, 18, 'Hello');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2,8, 'Universal',  '21',2013, 19, 'Set fire to the rain');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2,  9,'Universal', 'Carino reptil',2015, 20, 'Parque acuatico');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2, 9, 'Universal', 'Carino reptil', 2015,21, 'El paraiso de los perros');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2, 9, 'Universal', 'Carino reptil',2015, 24, 'Puente');
+	INSERT INTO tpo_musica.consulta578(id_disquera,id_album,nombre_disquera,  nombre_album, ano_album, id_cancion,  nombre_cancion) VALUES (2, 10, 'Universal', 'Ahi vamos',2006, 22, 'Crimen');
+	INSERT INTO tpo_musica.consulta578(id_disquera, id_album,nombre_disquera nombre_album,ano_album, id_cancion, nombre_cancion) VALUES (2, 10, 'Universal',  'Ahi vamos',2006, 23, 'Puente');
+APPLY BATCH;
+
+##Consulta6
+BEGIN BATCH
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (1, 'Californication',2,'Claudio', 'Godio', 1, 'Muy buen album, me encanto','2019-11-01 00:00:00',[1,2,3,4,5]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (1, 'Californication',7,'Alexis', 'Armengol', 2, 'Amo “Californication”, la tengo en repeat desde hace 2 semanas','2019-11-01 00:00:00',[1,2,3,4,5]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (2, 'Wasting Light',1,'Lucas', 'Sanse', 3, 'Dave Grohl se paso con estas canciones. Recomendado!','2019-11-01 00:00:00',[9,7]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (3, 'Echoes, Silence, Patience and Grace',4,'Federico', 'Parodi', 4, 'Este es el album de los Foo que menos me gusta.','2019-11-01 00:00:00',[6,11]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (3, 'Echoes, Silence, Patience and Grace',3,'Lucas', 'Sanse', 5, 'Buenisimo! Digno de disfrutar en un buen equipo de audio','2019-11-04 00:00:00',[6,11]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (4, 'One by One',5,'Agostina', 'Coste', 6, 'Un estilo distinto al que estamos acostumbrados de la banda, pero en general, safa','2019-11-06 00:00:00',[8,10]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (5, 'Divide',6,'Axel', 'Roitmann', 7, 'La voz de este chico me tranquiliza. Lo amo!','2019-11-06 00:00:00',[12,13]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (5, 'Divide',8,'Mariano', 'Saa', 8, 'Unico! Lo escucharia siempre','2019-11-07 00:00:00',[12,13]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (6, 'Justin Bieber',6,'Axel', 'Roitman', 9, 'Malisimo! Odio que este pibe tenga tanto exito','2019-11-07 00:00:00',[14,15]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (6, 'Justin Bieber',2,'Claudio', 'Godio', 10, 'Este flaco es exitoso? En cualquier momento me hago famoso yo si seguimos asi','2019-11-07 00:00:00',[14,15]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (7, 'Del Rey',8,'Mariano', 'Saa', 11, 'Que voz hermosa tiene esta mujer','2019-11-08 00:00:00',[16,17]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (7, 'Del Rey',5,'Agostina', 'Coste', 12, 'Me encanta siempre!','2019-11-09 00:00:00',[16,17]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (8, '21',9,'Matias', 'Panza', 13, 'Siempre la rompen. Bien chill para estudiar','2019-11-10 00:00:00',[18,19]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (9, 'Carino reptil',10,'Pepe', 'Mujica', 14, 'Medio repetitivo, pero tiene buena onda.','2019-11-11 00:00:00',[20,21,24]);
+	INSERT INTO tpo_musica.consulta6(id_album, nombre_album, id_autor_resena, nombre_autor_resena, apellido_autor_resena, id_resena,texto_resena,fecha_resena,id_canciones) VALUES (10, 'Ahi vamos',7,'Alexis', 'Armengol', 15, 'Cerati volve, te necesitamos','2019-11-11 00:00:00',[22,23]);
+APPLY BATCH;
+
+
+#### CONSULTAS
+consulta 1: 
+select * from consulta1 where id_usuario = 5 ;
+
+Consulta 2:
+select id_cancion, nombre_cancion, letra_cancion, genero_cancion, id_autor_letra, apellido_musico_letra, nombre_musico_letra, isbanda_musico_letra from consulta234 where nombre_cancion = 'Snow' allow filtering;
+
+select id_cancion, nombre_cancion, letra_cancion, genero_cancion, id_autor_letra, apellido_musico_letra, nombre_musico_letra, isbanda_musico_letra from consulta234 where id_cancion = 5 allow filtering;
+
+Consulta 3:
+select id_cancion, nombre_cancion, letra_cancion, genero_cancion, id_autor_letra, apellido_musico_letra, nombre_musico_letra, isbanda_musico_letra, id_autor_musica, apellido_musico_musica,nombre_musico_musica, isbanda_musico_musica from consulta234 where nombre_cancion = 'Hello'  allow filtering;
+
+select id_cancion, nombre_cancion, letra_cancion, genero_cancion, id_autor_letra, apellido_musico_letra, nombre_musico_letra, isbanda_musico_letra, id_autor_musica, apellido_musico_musica,nombre_musico_musica, isbanda_musico_musica from consulta234 where id_cancion = 8 allow filtering;
+
+Consulta 4:
+Requiere hacer otra tabla, según recomiendan los expertos, donde se lleve un conteo que se actualice con cada canción ingresada al sistema (a nivel de aplicacion). 
+
+CREATE TABLE consulta4(
+	id_interprete int,
+	cant_canciones counter,
+	PRIMARY KEY (id_interprete)
+);
+
+
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+6 where id_interprete = 1;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+5 where id_interprete = 2;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+2 where id_interprete = 3;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+2 where id_interprete = 4;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+2 where id_interprete = 5;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+3 where id_interprete = 6;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+2 where id_interprete = 7;
+	UPDATE tpo_musica.consulta4 SET cant_canciones=cant_canciones+2 where id_interprete = 9;
+
+
+
+Consulta 5:
+Sin repetidos, pero sin datos:
+select distinct id_disquera, id_album, nombre_album from consulta578 where id_disquera=1 allow filtering ;
+
+Con datos, pero repetidos:
+select id_disquera, nombre_disquera, id_album, nombre_album, ano_album, portada_album from consulta578 where id_disquera=1 allow filtering ;
+
+Consulta 6:
+select id_resena, id_autor_resena, apellido_autor_resena,nombre_autor_resena, fecha_resena, texto_resena from consulta6 where id_canciones contains 15 ;
+
+Consulta 7:
+ select id_album, nombre_album, id_cancion, nombre_cancion from consulta578 where id_album = 5 allow filtering;
+
+Consulta 8:
+select id_album, nombre_album, ano_album, portada_album from consulta578 where id_cancion = 3 allow filtering;
+
+
+
+
+
+
+	

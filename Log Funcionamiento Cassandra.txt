@@ -1,0 +1,106 @@
+Connected session: s0
+######################### ---------   Ejemplos de lectura de la base de datos
+···························Consulta 1
+15:27:58.855 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+#### El usuario 1 (Sanse, Lucas) Escucha las bandas: 
+Id musico: 3
+Nombre: Ed
+Apellido: Sheeran
+-----------------------
+Id musico: 6
+Nombre: El
+Apellido: Kuelgue
+-----------------------
+Id musico: 9
+Nombre: Gustavo
+Apellido: Cerati
+-----------------------
+··························Consulta 6
+15:27:58.874 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+Id reseña: 7
+Id autor reseña: 6
+Nombre y apellido: Axel Roitmann
+Reseña: 
+ 	La voz de este chico me tranquiliza. Lo amo!
+--------------------------------------
+Id reseña: 8
+Id autor reseña: 8
+Nombre y apellido: Mariano Saa
+Reseña: 
+ 	Unico! Lo escucharia siempre
+--------------------------------------
+····························Consulta 4
+15:27:58.881 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+15:27:58.889 [s0-io-1] WARN com.datastax.oss.driver.internal.core.cql.CqlRequestHandler - Query '[0 values] SELECT max(cant_canciones) FROM tpo_musica.consulta4;' generated server side warning(s): Aggregation query used without partition key
+15:27:58.898 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+#### Músico(s) con más canciones interpretadas ####
+15:27:58.909 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+Id musico: 1
+Nombre músico: 
+Apellido músico: Foo Fighters
+-------------------------------------------
+######################### ---------  CRUDL De reseñas
+15:27:58.914 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+15:27:58.914 [s0-io-1] WARN com.datastax.oss.driver.internal.core.cql.CqlRequestHandler - Query '[0 values] select count(*) from tpo_musica.consulta6' generated server side warning(s): Aggregation query used without partition key
+15:27:58.917 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+15:27:58.928 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+15:27:58.938 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+La reseña ha sido creada con el numero 16
+########################Comprobación de que se agregó: 
+15:27:58.958 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+Id reseña: 1
+Id autor reseña: 2
+Nombre y apellido: Claudio Godio
+Reseña: 
+ 	Muy buen album, me encanto
+--------------------------------------
+Id reseña: 2
+Id autor reseña: 7
+Nombre y apellido: Alexis Armengol
+Reseña: 
+ 	Amo “Californication”, la tengo en repeat desde hace 2 semanas
+--------------------------------------
+Id reseña: 16
+Id autor reseña: 1
+Nombre y apellido: Lucas Sanse
+Reseña: 
+ 	Muy Bueno!
+--------------------------------------
+15:27:58.979 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+15:27:58.986 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+########################Comprobación de que se cambió: 
+15:27:59.000 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+Id reseña: 1
+Id autor reseña: 2
+Nombre y apellido: Claudio Godio
+Reseña: 
+ 	Muy buen album, me encanto
+--------------------------------------
+Id reseña: 2
+Id autor reseña: 7
+Nombre y apellido: Alexis Armengol
+Reseña: 
+ 	Amo “Californication”, la tengo en repeat desde hace 2 semanas
+--------------------------------------
+Id reseña: 16
+Id autor reseña: 1
+Nombre y apellido: Lucas Sanse
+Reseña: 
+ 	Cambié de opinion, malísimo
+--------------------------------------
+15:27:59.011 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+15:27:59.018 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+########################Comprobación de que se eliminó: 
+15:27:59.030 [s0-io-1] DEBUG com.datastax.oss.driver.internal.core.channel.InFlightHandler - [s0|id: 0x278bdfcf, L:/127.0.0.1:53996 - R:/127.0.0.1:9042] Got last response on in-flight stream id 0, completing and releasing
+Id reseña: 1
+Id autor reseña: 2
+Nombre y apellido: Claudio Godio
+Reseña: 
+ 	Muy buen album, me encanto
+--------------------------------------
+Id reseña: 2
+Id autor reseña: 7
+Nombre y apellido: Alexis Armengol
+Reseña: 
+ 	Amo “Californication”, la tengo en repeat desde hace 2 semanas
+--------------------------------------
